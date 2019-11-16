@@ -1,5 +1,8 @@
 package dev.alexengrig.java.concurrency.example.race;
 
+import dev.alexengrig.java.concurrency.annotation.NotThreadSafe;
+import dev.alexengrig.java.concurrency.annotation.ThreadSafe;
+
 import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -65,6 +68,7 @@ public class RaceCondition {
     }
 }
 
+@NotThreadSafe
 class SimpleCounter implements Counter {
     private int count;
 
@@ -79,6 +83,7 @@ class SimpleCounter implements Counter {
     }
 }
 
+@NotThreadSafe
 class VolatileCounter implements Counter {
     private volatile int count;
 
@@ -94,6 +99,7 @@ class VolatileCounter implements Counter {
     }
 }
 
+@ThreadSafe
 class SynchronizedMethodCounter implements Counter {
     private int count;
 
@@ -108,6 +114,7 @@ class SynchronizedMethodCounter implements Counter {
     }
 }
 
+@ThreadSafe
 class SynchronizedStatementsCounter implements Counter {
     private final Object lock = new Object();
     private int count;
@@ -125,6 +132,7 @@ class SynchronizedStatementsCounter implements Counter {
     }
 }
 
+@ThreadSafe
 class LockCounter implements Counter {
     private static final Lock locker = new ReentrantLock();
     private int count = 0;
@@ -142,6 +150,7 @@ class LockCounter implements Counter {
     }
 }
 
+@ThreadSafe
 class AtomicCounter implements Counter {
     private final AtomicInteger count = new AtomicInteger();
 
