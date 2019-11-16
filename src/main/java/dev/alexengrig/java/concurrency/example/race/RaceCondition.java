@@ -3,6 +3,8 @@ package dev.alexengrig.java.concurrency.example.race;
 import java.util.Date;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 interface Counter {
     void inc();
@@ -37,6 +39,7 @@ public class RaceCondition {
         check(new VolatileCounter());
         check(new SynchronizedMethodCounter());
         check(new SynchronizedStatementsCounter());
+        check(new LockCounter());
         check(new AtomicCounter());
     }
 
@@ -114,6 +117,23 @@ class SynchronizedStatementsCounter implements Counter {
         synchronized (lock) {
             count++;
         }
+    }
+
+    @Override
+    public int get() {
+        return count;
+    }
+}
+
+class LockCounter implements Counter {
+    private static final Lock locker = new ReentrantLock();
+    private int count = 0;
+
+    @Override
+    public void inc() {
+        locker.lock();
+        count++;
+        locker.unlock();
     }
 
     @Override
