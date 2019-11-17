@@ -1,5 +1,6 @@
 package dev.alexengrig.java.concurrency.example.race;
 
+import dev.alexengrig.java.concurrency.annotation.GuardedBy;
 import dev.alexengrig.java.concurrency.annotation.NotThreadSafe;
 import dev.alexengrig.java.concurrency.annotation.ThreadSafe;
 
@@ -101,6 +102,7 @@ class VolatileCounter implements Counter {
 
 @ThreadSafe
 class SynchronizedMethodCounter implements Counter {
+    @GuardedBy("this")
     private int count;
 
     @Override
@@ -116,12 +118,14 @@ class SynchronizedMethodCounter implements Counter {
 
 @ThreadSafe
 class SynchronizedStatementsCounter implements Counter {
-    private final Object lock = new Object();
+    private static final Object LOCKER = new Object();
+
+    @GuardedBy("LOCKER")
     private int count;
 
     @Override
     public void inc() {
-        synchronized (lock) {
+        synchronized (LOCKER) {
             count++;
         }
     }
@@ -134,14 +138,16 @@ class SynchronizedStatementsCounter implements Counter {
 
 @ThreadSafe
 class LockCounter implements Counter {
-    private static final Lock locker = new ReentrantLock();
+    private static final Lock LOCKER = new ReentrantLock();
+
+    @GuardedBy("LOCKER")
     private int count = 0;
 
     @Override
     public void inc() {
-        locker.lock();
+        LOCKER.lock();
         count++;
-        locker.unlock();
+        LOCKER.unlock();
     }
 
     @Override
