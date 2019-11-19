@@ -38,6 +38,10 @@ Atomicity:
 > An atomic operation is one that is atomic with respect to all operations, including itself,
 > that operate on the same state.
 
+> Where practical, use existing thread-safe objects, like AtomicLong, to manage your class's state.
+> It is simpler to reason about the possible states and state transitions for existing thread-safe objects
+> than it is for arbitrary state variables, and this makes it easier to maintain and verify thread safety.
+
 ## Status
 
 In progress.
