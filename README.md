@@ -42,6 +42,22 @@ Atomicity:
 > It is simpler to reason about the possible states and state transitions for existing thread-safe objects
 > than it is for arbitrary state variables, and this makes it easier to maintain and verify thread safety.
 
+> To preserve state consistency, update related state variables in a single atomic operation.
+
+Intrinsic Locks:
+
+> ```java
+> synchronized (lock) {
+>     // Access or modify shared state guarded by lock
+> }
+> ```
+
+Guarding State with Locks:
+
+> For each mutable state variable that may be accessed by more than one thread,
+> all accesses to that variable must be performed with the same lock held.
+> In this case, we say that the variable is guarded by that lock.
+
 ## Status
 
 In progress.
