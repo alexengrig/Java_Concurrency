@@ -58,6 +58,47 @@ Guarding State with Locks:
 > all accesses to that variable must be performed with the same lock held.
 > In this case, we say that the variable is guarded by that lock.
 
+> Every shared, mutable variable should be guarded by exactly one lock.
+> Make it clear to maintainers which lock that is.
+
+> For every invariant that involves more than one variable,
+> all the variables involved in that invariant must be guarded by the same lock.
+
+Simplicity and performance:
+
+> There is frequently a tension between simplicity and performance.
+> When implementing a synchronization policy, resist the temptation
+> to prematurely sacrifice simplicity (potentially compromising safety) for the sake of performance.
+
+> Avoid holding locks during lengthy computations or operations at risk
+> of not completing quickly such as network or console I/O.
+
+Visibility:
+
+> In the absence of synchronization, the compiler, processor,
+> and runtime can do some downright weird things to the order in which operations appear to execute.
+> Attempts to reason about the order in which memory actions "must" happen in
+> insufficiently synchronized multithreaded programs will almost certainly be incorrect.
+
+Locking and Visibility:
+
+> Locking is not just about mutual exclusion; it is also about memory visibility.
+> To ensure that all threads see the most up-to-date values of shared mutable variables,
+> the reading and writing threads must synchronize on a common lock.
+>
+> ![Visibility Guarantees for Synchronization](doc/image/visibility_guarantees_for_synchronization.png)
+
+Volatile Variables:
+
+> Use volatile variables only when they simplify implementing and verifying your synchronization policy; avoid using
+> volatile variables when verifying correctness would require subtle reasoning about visibility. Good uses of volatile
+> variables include ensuring the visibility of their own state, that of the object they refer to, or indicating that an
+> important lifecycle event (such as initialization or shutdown) has occurred.
+
+Visibility and atomicity:
+
+> Locking can guarantee both visibility and atomicity; volatile variables can only guarantee visibility.
+
 ## Status
 
 In progress.
