@@ -99,6 +99,10 @@ Visibility and atomicity:
 
 > Locking can guarantee both visibility and atomicity; volatile variables can only guarantee visibility.
 
+Safe Construction:
+
+> Do not allow the this reference to escape during construction.
+
 ## Status
 
 In progress.
