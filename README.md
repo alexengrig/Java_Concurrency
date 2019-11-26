@@ -103,6 +103,20 @@ Safe Construction:
 
 > Do not allow the this reference to escape during construction.
 
+Immutability:
+
+> Immutable objects are always thread-safe.
+
+> An object is immutable if:
+> - Its state cannot be modified after construction;
+> - All its fields are final; and
+> - It is properly constructed (the this reference does not escape during construction).
+
+Final Fields:
+
+> Just as it is a good practice to make all fields private unless they need greater visibility,
+> it is a good practice to make all fields final unless they need to be mutable.
+
 ## Status
 
 In progress.
