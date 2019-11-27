@@ -117,6 +117,11 @@ Final Fields:
 > Just as it is a good practice to make all fields private unless they need greater visibility,
 > it is a good practice to make all fields final unless they need to be mutable.
 
+Immutable objects:
+
+> Immutable objects can be used safely by any thread without additional synchronization,
+> even when synchronization is not used to publish them.
+
 ## Status
 
 In progress.
