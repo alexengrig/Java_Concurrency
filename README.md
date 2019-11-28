@@ -122,6 +122,24 @@ Immutable objects:
 > Immutable objects can be used safely by any thread without additional synchronization,
 > even when synchronization is not used to publish them.
 
+Safe Publication Idioms:
+
+> To publish an object safely, both the reference to the object and the object's state must be made visible to other
+> threads at the same time. A properly constructed object can be safely published by:
+> - Initializing an object reference from a static initializer;
+> - Storing a reference to it into a volatile field or AtomicReference;
+> - Storing a reference to it into a final field of a properly constructed object; or
+> - Storing a reference to it into a field that is properly guarded by a lock.
+
+> Using a static initializer is often the easiest and safest way to publish objects that can be statically constructed:
+> ```java
+> public static Holder holder = new Holder(42);
+> ```
+
+Effectively Immutable Objects:
+
+> Safely published effectively immutable objects can be used safely by any thread without additional synchronization
+
 ## Status
 
 In progress.
