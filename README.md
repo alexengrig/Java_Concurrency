@@ -181,6 +181,31 @@ Instance Confinement:
 > Confinement makes it easier to build thread-safe classes because a class that
 > confines its state can be analyzed for thread safety without having to examine the whole program.
 
+When Delegation Fails:
+
+> If a class is composed of multiple independent thread-safe state variables and has no operations
+> that have any invalid state transitions, then it can delegate thread safety to the underlying state variables.
+
+Publishing Underlying State Variables:
+
+> If a state variable is thread-safe, does not participate in any invariants that constrain its value,
+> and has no prohibited state transitions for any of its operations, then it can safely be published.
+
+Documenting Synchronization Policies:
+
+> Document a class's thread safety guarantees for its clients; 
+> document its synchronization policy for its maintainers.
+
+Hidden Iterators:
+
+> Just as encapsulating an object's state makes it easier to preserve its invariants, 
+> encapsulating its synchronization makes it easier to enforce its synchronization policy.
+
+Concurrent Collections:
+
+> Replacing synchronized collections with concurrent collections can offer dramatic scalability improvements
+> with little risk.
+
 ## Status
 
 In progress.
