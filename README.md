@@ -206,6 +206,12 @@ Concurrent Collections:
 > Replacing synchronized collections with concurrent collections can offer dramatic scalability improvements
 > with little risk.
 
+Queues:
+
+> Bounded queues are a powerful resource management tool for building reliable applications:
+> they make your program more robust to overload by throttling activities
+> that threaten to produce more work than can be handled.
+
 ## Status
 
 In progress.
