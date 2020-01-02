@@ -233,6 +233,11 @@ Summary of Part I:
 > - Include thread safety in the design processor explicitly document that your class is not thread-safe.
 > - Document your synchronization policy.
 
+Finding Exploitable Parallelism:
+
+> The real performance payoff of dividing a program's workload into tasks comes when there are a large number of
+> independent, homogeneous tasks that can be processed concurrently.
+
 ## Status
 
 In progress.
